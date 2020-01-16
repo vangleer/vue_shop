@@ -10,4 +10,7 @@ export default {
 }
 </script>
 <style lang="less">
+.el-card {
+  margin-top: 15px;
+}
 </style>
