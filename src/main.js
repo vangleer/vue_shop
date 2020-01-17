@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/fonts/iconfont.css'
 // 导入axios
 import axios from 'axios'
+import TreeTable from 'vue-table-with-tree-grid'
 
 // 引入全局样式表
 import './assets/css/global.css'
@@ -19,7 +20,7 @@ axios.interceptors.request.use(config => {
 })
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
-
+Vue.component('tree-table', TreeTable)
 new Vue({
   router,
   render: h => h(App)
