@@ -62,6 +62,7 @@ export default {
     }
 
     // 4. 准备数据和配置项
+    // eslint-disable-next-line no-undef
     const result = _.merge(res.data, this.options)
 
     // 5. 展示数据

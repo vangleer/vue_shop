@@ -3,7 +3,7 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <img src="../assets/heima.png" alt />
+        <a class="logo" href="javascript:;"></a>
         <span>电商后台管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
@@ -13,16 +13,7 @@
       <!-- 侧边栏 -->
       <el-aside :width="isCollapse ? '84px' : '200px'">
         <div class="toggle_button" @click="toggleCollapse">|||</div>
-        <el-menu
-          background-color="#333744"
-          text-color="#fff"
-          active-text-color="#409eff"
-          unique-opened
-          :collapse="isCollapse"
-          :collapse-transition="false"
-          router
-          :default-active="activePath"
-        >
+        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409eff" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
           <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模版区 -->
             <template slot="title">
@@ -32,12 +23,7 @@
               <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item
-              :index="'/'+subItem.path"
-              v-for="subItem in item.children"
-              :key="subItem.id"
-              @click="saveNavState('/'+subItem.path)"
-            >
+            <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)">
               <!-- 二级菜单的模版区 -->
               <template slot="title">
                 <!-- 图标 -->
@@ -126,7 +112,7 @@ export default {
     display: flex;
     align-items: center;
     span {
-      margin-left: 15px;
+      margin-left: 5px;
     }
   }
 }
@@ -141,5 +127,13 @@ export default {
 }
 .iconfont {
   margin-right: 6px;
+}
+.el-header .logo {
+  width: 80px;
+  height: 80px;
+  background: url('../assets/logo_03.png') center 10px no-repeat;
+  background-size: 126px;
+  overflow: hidden;
+  margin-left: 20px;
 }
 </style>

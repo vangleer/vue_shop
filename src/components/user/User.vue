@@ -16,7 +16,7 @@
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加用户</el-button>
         </el-col>
       </el-row>
       <!-- 用户列表区 -->
@@ -34,25 +34,10 @@
         <el-table-column label="操作">
           <template slot-scope="scope" width="190px">
             <!-- 修改按钮 -->
-            <el-button
-              type="primary"
-              @click="showEditUser(scope.row.id)"
-              icon="el-icon-edit"
-              size="mini"
-            ></el-button>
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              @click="removeUserById(scope.row.id)"
-              size="mini"
-            ></el-button>
+            <el-button type="primary" @click="showEditUser(scope.row.id)" icon="el-icon-edit" size="mini"></el-button>
+            <el-button type="danger" icon="el-icon-delete" @click="removeUserById(scope.row.id)" size="mini"></el-button>
             <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button
-                type="warning"
-                icon="el-icon-setting"
-                @click="setRole(scope.row)"
-                size="mini"
-              ></el-button>
+              <el-button type="warning" icon="el-icon-setting" @click="setRole(scope.row)" size="mini"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -70,24 +55,14 @@
     </el-card>
 
     <!-- 分配角色对话框 -->
-    <el-dialog
-      title="分配角色"
-      :visible.sync="setRoleDialogVisible"
-      @close="setRoleDialoClose"
-      width="50%"
-    >
+    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" @close="setRoleDialoClose" width="50%">
       <div>
-        <p>当前的用户:{{userInfo.username}}</p>
-        <p>当前的角色:{{userInfo.role_name}}</p>
+        <p>当前的用户:{{ userInfo.username }}</p>
+        <p>当前的角色:{{ userInfo.role_name }}</p>
         <p>
           分配新角色:
           <el-select placeholder="请选择角色" v-model="selectRoleId">
-            <el-option
-              v-for="item in rolesList"
-              :key="item.id"
-              :label="item.roleName"
-              :value="item.id"
-            ></el-option>
+            <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id"></el-option>
           </el-select>
         </p>
       </div>
@@ -302,7 +277,7 @@ export default {
     editUser() {
       this.$refs.editFormRef.validate(async valid => {
         // eslint-disable-next-line no-useless-return
-        if (!valid) return
+        if (!valid) return ''
         // 发起修改用户的请求
         const { data: res } = await this.$http.put('users/' + this.editForm.id, { email: this.editForm.email, mobile: this.editForm.mobile })
         if (res.meta.status !== 200) return this.$message.error('修改用户失败')
@@ -316,15 +291,11 @@ export default {
     },
     // 根据id删除用户
     async removeUserById(id) {
-      const comfirmRes = await this.$confirm(
-        '此操作将永久删除该用户, 是否继续?',
-        '提示',
-        {
-          cancelButtonText: '取消',
-          confirmButtonText: '确定',
-          type: 'warning'
-        }
-      ).catch(err => err)
+      const comfirmRes = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
+      }).catch(err => err)
       //   判断是否要删除
       if (comfirmRes !== 'confirm') {
         return this.$message.info('已取消删除操作')

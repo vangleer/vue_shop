@@ -14,12 +14,19 @@ import 'quill/dist/quill.bubble.css'
 import axios from 'axios'
 import TreeTable from 'vue-table-with-tree-grid'
 import VueQuillEditor from 'vue-quill-editor'
-
+import NProgress from 'nprogress'
 // 引入全局样式表
 import './assets/css/global.css'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+// 在request拦截器中，展示进度条
 axios.interceptors.request.use(config => {
+  NProgress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+// 在response拦截器中，隐藏进度条
+axios.interceptors.response.use(config => {
+  NProgress.done()
   return config
 })
 Vue.filter('dateFormat', function(originValue) {

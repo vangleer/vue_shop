@@ -10,8 +10,7 @@
     <!-- 卡片视图 -->
     <el-card>
       <!-- 提示区域 -->
-      <el-alert title="添加商品信息" type="info" center show-icon :closable="false">
-      </el-alert>
+      <el-alert title="添加商品信息" type="info" center show-icon :closable="false"> </el-alert>
       <!-- 步骤条区域 -->
       <el-steps :space="200" :active="activeIndex - 0" finish-status="success" align-center>
         <el-step title="基本信息"></el-step>
@@ -40,8 +39,7 @@
               <el-input v-model="addForm.goods_number" type="number"></el-input>
             </el-form-item>
             <el-form-item label="商品分类" prop="goods_cat">
-              <el-cascader expand-trigger="hover" :options="catelist" :props="cateProps" v-model="addForm.goods_cat" @change="handleChange">
-              </el-cascader>
+              <el-cascader expand-trigger="hover" :options="catelist" :props="cateProps" v-model="addForm.goods_cat" @change="handleChange"> </el-cascader>
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane label="商品参数" name="1">
@@ -72,12 +70,11 @@
           </el-tab-pane>
         </el-tabs>
       </el-form>
-
     </el-card>
 
     <!-- 图片预览 -->
     <el-dialog title="图片预览" :visible.sync="previewVisible" width="50%">
-      <img :src="previewPath" alt="" class="previewImg">
+      <img :src="previewPath" alt="" class="previewImg" />
     </el-dialog>
   </div>
 </template>
@@ -104,21 +101,11 @@ export default {
         attrs: []
       },
       addFormRules: {
-        goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' }
-        ],
-        goods_price: [
-          { required: true, message: '请输入商品价格', trigger: 'blur' }
-        ],
-        goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' }
-        ],
-        goods_number: [
-          { required: true, message: '请输入商品数量', trigger: 'blur' }
-        ],
-        goods_cat: [
-          { required: true, message: '请选择商品分类', trigger: 'blur' }
-        ]
+        goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
+        goods_price: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
+        goods_weight: [{ required: true, message: '请输入商品重量', trigger: 'blur' }],
+        goods_number: [{ required: true, message: '请输入商品数量', trigger: 'blur' }],
+        goods_cat: [{ required: true, message: '请选择商品分类', trigger: 'blur' }]
       },
       // 商品分类列表
       catelist: [],
@@ -176,12 +163,9 @@ export default {
       // console.log(this.activeIndex)
       // 证明访问的是动态参数面板
       if (this.activeIndex === '1') {
-        const { data: res } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          {
-            params: { sel: 'many' }
-          }
-        )
+        const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
+          params: { sel: 'many' }
+        })
 
         if (res.meta.status !== 200) {
           return this.$message.error('获取动态参数列表失败！')
@@ -189,17 +173,13 @@ export default {
 
         console.log(res.data)
         res.data.forEach(item => {
-          item.attr_vals =
-            item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
+          item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
         })
         this.manyTableData = res.data
       } else if (this.activeIndex === '2') {
-        const { data: res } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          {
-            params: { sel: 'only' }
-          }
-        )
+        const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
+          params: { sel: 'only' }
+        })
 
         if (res.meta.status !== 200) {
           return this.$message.error('获取静态属性失败！')

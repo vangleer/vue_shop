@@ -6,24 +6,14 @@
         <img src="../assets/logo.png" alt />
       </div>
       <!-- form区域 -->
-      <el-form
-        ref="loginFormRef"
-        :rules="loginFormRules"
-        :model="loginForm"
-        label-width="0px"
-        class="login_form"
-      >
+      <el-form ref="loginFormRef" :rules="loginFormRules" :model="loginForm" label-width="0px" class="login_form">
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            v-model="loginForm.password"
-            prefix-icon="iconfont icon-3702mima"
-          ></el-input>
+          <el-input type="password" v-model="loginForm.password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
@@ -54,7 +44,8 @@ export default {
         //   密码的验证规则
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 16, message: '密码必须在6到16之间', trigger: 'blur' }]
+          { min: 6, max: 16, message: '密码必须在6到16之间', trigger: 'blur' }
+        ]
       }
     }
   },
